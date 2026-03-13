@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | MICG ✦</title>
+    <title>Dashboard | Image Caption Generator</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
 
     <!-- Navbar -->
     <nav class="navbar-custom">
-        <a class="navbar-brand-custom" href="generate.html">MICG ✦</a>
+        <a class="navbar-brand-custom" href="generate.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;"><svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="18" fill="#1a1d2e"/><rect x="8" y="9" width="20" height="15" rx="3" fill="#252840" stroke="#4f6ef7" stroke-width="1.5"/><polygon points="8,24 14,15 19,19 24,12 28,24" fill="#3a4070"/><polygon points="19,19 24,12 28,24" fill="#4f6ef7" opacity="0.8"/><circle cx="12" cy="14" r="2" fill="#f59e0b"/></svg><span style="color:white;font-weight:700;font-size:1rem;">Mood-Based Image Caption Generator</span></a>
         <div id="nav-auth-controls" class="d-none d-flex gap-3 align-items-center">
             <span id="nav-user-email" class="text-muted small d-none d-sm-block"></span>
             <a href="saved.html" class="btn-ghost text-decoration-none">Saved</a>
@@ -131,17 +131,7 @@
                     <!-- Right: Results -->
                     <div class="col-lg-7">
                         <div id="results-container" class="d-none">
-                            <!-- AI Insight Section -->
-                            <div class="glass-card p-4 mb-4 border-primary-subtle">
-                                <h3 class="h6 fw-bold text-primary-custom mb-2">
-                                    <i class="bi bi-eye"></i> AI Image Insight
-                                </h3>
-                                <p id="ai-insight-text" class="small text-light-emphasis mb-0 italic">
-                                    Analyzing visual elements...
-                                </p>
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h2 class="h5 fw-bold mb-0">Generated Captions</h2>
                                 <button type="button" id="regenerate-btn" class="btn btn-sm btn-ghost">
                                     <i class="bi bi-arrow-clockwise"></i> Regenerate
