@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             try {
                 await signOut(auth);
+                sessionStorage.removeItem('micg_generate_state'); // Only clear the unsaved images/captions
                 window.location.href = 'index.html';
             } catch (err) {
                 console.error("Logout failed", err);
