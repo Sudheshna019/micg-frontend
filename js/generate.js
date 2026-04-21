@@ -135,6 +135,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (regenerateBtn) {
         regenerateBtn.addEventListener('click', () => performGeneration());
     }
+
+    /**
+     * Probes the backend to see if it's awake. 
+     * Hugging Face Spaces take 30-60s to wake up from Sleep.
+     */
+    async function checkBackendReady(maxRetries = 5) {
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                if (loadingMessage) {
+                    loadingMessage.textContent = i === 0 
+                        ? "Connecting to AI engine..." 
+                        : `Waking up AI engine (Attempt ${i + 1}/${maxRetries})... this may take a minute.`;
+                }
+                const response = await fetch(`${BACKEND_URL}/`, { method: 'GET' });
+                if (response.ok) return true;
+            } catch (e) {
+                console.log("Backend still sleeping, retrying...");
+            }
+            // Wait 5 seconds before next retry
+            await new Promise(resolve => setTimeout(resolve, 5000));
+        }
+        return false;
+    }
  
     async function performGeneration() {
         let fileToUpload = selectedFile;
@@ -160,6 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
  
         // Show loading
         loadingOverlay.classList.remove('d-none');
+        
+        // Step 1: Ensure backend is awake
+        const isReady = await checkBackendReady();
+        if (!isReady) {
+            loadingOverlay.classList.add('d-none');
+            showToast("Backend is still sleeping. Please try again in a few moments.", "error");
+            if (generateBtn) generateBtn.disabled = false;
+            return;
+        }
+
         if (loadingMessage) {
             loadingMessage.textContent = "Our AI is crafting unique captions... This typically takes 15-25 seconds.";
         }
